@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ALTER AI</string>
+    <string name="alter_accessibility_label">ALTER phone control</string>
+    <string name="alter_accessibility_description">Allows ALTER to read the visible screen and perform taps, scrolls, typing, and navigation only after you approve actions inside the app.</string>
+    <string name="alter_notification_listener_label">ALTER AI</string>
+    <string name="alter_device_admin_label">ALTER device admin</string>
+    <string name="alter_device_admin_description">Allows ALTER to run as a managed-device admin in test profiles and Device Owner AVDs. This does not bypass Android consent gates.</string>
+    <string name="alter_device_admin_enabled">ALTER device admin enabled</string>
+    <string name="alter_device_admin_disabled">ALTER device admin disabled</string>
+    <string name="alter_hce_description">Share your ALTER profile with another phone over NFC.</string>
+    <string name="alter_hce_aid_group">ALTER profile exchange</string>
+</resources>

@@ -1,0 +1,78 @@
+{
+  "user_profile": {
+    "name": "Aria",
+    "current_role": "Senior product engineer",
+    "location": "San Francisco",
+    "industry": "AI productivity",
+    "current_salary": 140000,
+    "current_network_size": 420,
+    "risk_tolerance": 0.62,
+    "weekly_learning_hours": 9
+  },
+  "skills": [
+    {
+      "name": "Python",
+      "category": "technical",
+      "level": 0.82,
+      "years": 6
+    },
+    {
+      "name": "Product strategy",
+      "category": "product",
+      "level": 0.7,
+      "years": 4
+    },
+    {
+      "name": "Founder sales",
+      "category": "business",
+      "level": 0.58,
+      "years": 2
+    },
+    {
+      "name": "Team leadership",
+      "category": "leadership",
+      "level": 0.64,
+      "years": 3
+    },
+    {
+      "name": "Writing",
+      "category": "communication",
+      "level": 0.76,
+      "years": 5
+    }
+  ],
+  "goals": [
+    {
+      "title": "Build a premium AI operating system",
+      "category": "startup",
+      "horizon_months": 36,
+      "priority": 5
+    },
+    {
+      "title": "Become known for future-of-work systems",
+      "category": "reputation",
+      "horizon_months": 24,
+      "priority": 4
+    }
+  ],
+  "experience": [
+    {
+      "title": "Led AI workflow product",
+      "organization": "Venture-backed startup",
+      "domain": "AI",
+      "years": 3,
+      "impact": "Launched workflow automation used by 30 teams."
+    },
+    {
+      "title": "Built internal developer platform",
+      "organization": "Scaleup",
+      "domain": "Infrastructure",
+      "years": 4,
+      "impact": "Reduced release cycle time by 40 percent."
+    }
+  ],
+  "interests": ["AI agents", "networking", "future of work"],
+  "horizon_months": 36,
+  "currency": "USD"
+}
+

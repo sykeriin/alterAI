@@ -1,0 +1,5 @@
+# Supabase project configuration for ALTER.
+project_id = "alter"
+
+[functions.openai-chat]
+verify_jwt = true

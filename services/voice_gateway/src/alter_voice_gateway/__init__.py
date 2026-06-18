@@ -1,0 +1,2 @@
+"""ALTER Voice Gateway service."""
+

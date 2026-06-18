@@ -1,0 +1,18 @@
+{
+  "profile": {
+    "career_stage": "student founder",
+    "skills": ["Python", "FastAPI", "AI", "product", "backend"],
+    "goals": ["startup", "AI agents", "funding", "open source"],
+    "interests": ["developer tools", "automation", "AI agents"],
+    "preferred_locations": ["remote", "India", "San Francisco"],
+    "preferred_categories": ["hackathon", "grant", "accelerator", "internship"],
+    "risk_tolerance": 0.68
+  },
+  "crawl": {
+    "sources": ["devpost", "yc", "gsoc", "startup_grants"],
+    "query": "AI agents startup developer tools",
+    "limit_per_source": 2
+  },
+  "limit": 5
+}
+

@@ -1,0 +1,36 @@
+# Flutter and Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+.codex-run/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs and secrets
+*.log
+*.pid
+.alter_web_server.pid
+.env
+.env.*
+!.env.example
+
+# Local tooling / build caches (not source)
+.claude/
+android/.kotlin/
+supabase/.temp/

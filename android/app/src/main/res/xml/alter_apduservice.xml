@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<host-apdu-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/alter_hce_description"
+    android:requireDeviceUnlock="false">
+    <aid-group
+        android:description="@string/alter_hce_aid_group"
+        android:category="other">
+        <!-- NFC Forum Type 4 NDEF application AID. -->
+        <aid-filter android:name="D2760000850101"/>
+    </aid-group>
+</host-apdu-service>

@@ -1,0 +1,2 @@
+"""ALTER API Gateway service."""
+

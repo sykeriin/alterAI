@@ -1,0 +1,187 @@
+services:
+  api_gateway:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.service
+      args:
+        SERVICE_DIR: services/api_gateway
+    command: python -m uvicorn alter_api_gateway.api:app --host 0.0.0.0 --port 8060
+    env_file: .env
+    environment:
+      ALTER_VOICE_GATEWAY_URL: http://voice_gateway:8070
+      ALTER_CLONE_COUNCIL_URL: http://clone_council:8080
+      ALTER_FUTURE_SIMULATION_URL: http://future_simulation:8090
+      ALTER_MEMORY_SYSTEM_URL: http://memory_system:8100
+      ALTER_OPPORTUNITY_ENGINE_URL: http://opportunity_engine:8110
+      ALTER_SOCIAL_GRAPH_URL: http://social_graph:8120
+      ALTER_LENS_URL: http://alter_lens:8130
+      ALTER_REPUTATION_ENGINE_URL: http://reputation_engine:8140
+      ALTER_OFFICEKIT_URL: http://officekit:8150
+      SARVAM_API_KEY: ${SARVAM_API_KEY:-}
+      ALTER_SARVAM_CHAT_MODEL: ${ALTER_SARVAM_CHAT_MODEL:-sarvam-m}
+      ALTER_SARVAM_TRANSLATE_MODEL: ${ALTER_SARVAM_TRANSLATE_MODEL:-sarvam-translate:v1}
+      ALTER_SARVAM_STT_MODEL: ${ALTER_SARVAM_STT_MODEL:-saaras:v3}
+      ALTER_SARVAM_TTS_MODEL: ${ALTER_SARVAM_TTS_MODEL:-bulbul:v3}
+      ALTER_SARVAM_TTS_SPEAKER: ${ALTER_SARVAM_TTS_SPEAKER:-shubh}
+      ALTER_SARVAM_BASE_URL: ${ALTER_SARVAM_BASE_URL:-https://api.sarvam.ai}
+      ALTER_RATE_LIMIT_PER_MINUTE: ${ALTER_RATE_LIMIT_PER_MINUTE:-120}
+    ports:
+      - "8060:8060"
+    depends_on:
+      - voice_gateway
+      - clone_council
+      - future_simulation
+      - memory_system
+      - opportunity_engine
+      - social_graph
+      - alter_lens
+      - reputation_engine
+      - officekit
+
+  voice_gateway:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.service
+      args:
+        SERVICE_DIR: services/voice_gateway
+    command: python -m uvicorn alter_voice_gateway.api:app --host 0.0.0.0 --port 8070
+    env_file: .env
+    ports:
+      - "8070:8070"
+
+  clone_council:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.service
+      args:
+        SERVICE_DIR: services/clone_council
+    command: python -m uvicorn alter_clone_council.api:app --host 0.0.0.0 --port 8080
+    env_file: .env
+    environment:
+      ALTER_CLONE_COUNCIL_ENV: ${ALTER_CLONE_COUNCIL_ENV:-local}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ALTER_OPENAI_MODEL: ${ALTER_OPENAI_MODEL:-gpt-4.1}
+    ports:
+      - "8080:8080"
+
+  future_simulation:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.service
+      args:
+        SERVICE_DIR: services/future_simulation
+    command: python -m uvicorn alter_future_simulation.api:app --host 0.0.0.0 --port 8090
+    env_file: .env
+    ports:
+      - "8090:8090"
+
+  memory_system:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.service
+      args:
+        SERVICE_DIR: services/memory_system
+    command: python -m uvicorn alter_memory_system.api:app --host 0.0.0.0 --port 8100
+    env_file: .env
+    environment:
+      ALTER_DATABASE_URL: postgresql://alter:alter@postgres:5432/alter
+    ports:
+      - "8100:8100"
+    depends_on:
+      - postgres
+
+  opportunity_engine:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.service
+      args:
+        SERVICE_DIR: services/opportunity_engine
+    command: python -m uvicorn alter_opportunity_engine.api:app --host 0.0.0.0 --port 8110
+    env_file: .env
+    ports:
+      - "8110:8110"
+
+  social_graph:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.service
+      args:
+        SERVICE_DIR: services/social_graph
+    command: python -m uvicorn alter_social_graph.api:app --host 0.0.0.0 --port 8120
+    env_file: .env
+    environment:
+      ALTER_NEO4J_URI: neo4j://neo4j:7687
+    ports:
+      - "8120:8120"
+    depends_on:
+      - neo4j
+
+  alter_lens:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.service
+      args:
+        SERVICE_DIR: services/alter_lens
+    command: python -m uvicorn alter_lens.api:app --host 0.0.0.0 --port 8130
+    env_file: .env
+    environment:
+      ALTER_LENS_ENV: ${ALTER_LENS_ENV:-local}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ALTER_LENS_OPENAI_MODEL: ${ALTER_LENS_OPENAI_MODEL:-gpt-4.1-mini}
+    ports:
+      - "8130:8130"
+
+  reputation_engine:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.service
+      args:
+        SERVICE_DIR: services/reputation_engine
+    command: python -m uvicorn alter_reputation_engine.api:app --host 0.0.0.0 --port 8140
+    env_file: .env
+    ports:
+      - "8140:8140"
+
+  officekit:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile.service
+      args:
+        SERVICE_DIR: services/officekit
+    command: python -m uvicorn alter_officekit.api:app --host 0.0.0.0 --port 8150
+    env_file: .env
+    ports:
+      - "8150:8150"
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: alter
+      POSTGRES_USER: alter
+      POSTGRES_PASSWORD: alter
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  neo4j:
+    image: neo4j:5
+    environment:
+      NEO4J_AUTH: neo4j/password
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+
+  qdrant:
+    image: qdrant/qdrant:v1.12.4
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+volumes:
+  postgres_data:
+  neo4j_data:
+  qdrant_data:
